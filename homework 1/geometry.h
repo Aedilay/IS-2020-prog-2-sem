@@ -40,9 +40,9 @@ public:
 
     [[nodiscard]] Point getPoint(long position) const;
 
-    [[nodiscard]] double lenght(long i = 0) const;
+    [[nodiscard]] long lenght(long i = 0) const;
 
-    [[nodiscard]] virtual double perimeter() const;
+    [[nodiscard]] virtual long perimeter() const;
 };
 
 class ClosedPolygonalChain : public PolygonalChain {
@@ -51,7 +51,7 @@ public:
 
     ClosedPolygonalChain(const ClosedPolygonalChain &other);
 
-    [[nodiscard]] double perimeter() const override;
+    [[nodiscard]] long perimeter() const override;
 };
 
 class Polygon : public ClosedPolygonalChain {
@@ -60,7 +60,7 @@ public:
 
     Polygon(const Polygon &other);
 
-    [[nodiscard]] virtual double area() const;
+    [[nodiscard]] virtual long area() const;
 
     Polygon &operator=(const Polygon &polygonCopy);
 };
@@ -93,9 +93,9 @@ public:
 
     RegularPolygon(const RegularPolygon &other);
 
-    [[nodiscard]] double perimeter() const override;
+    [[nodiscard]] long perimeter() const override;
 
-    [[nodiscard]] double area() const override;
+    [[nodiscard]] long area() const override;
 };
 
 #endif //MAIN_CPP_GEOMETRY_H

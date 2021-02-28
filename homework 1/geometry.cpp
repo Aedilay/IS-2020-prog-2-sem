@@ -49,12 +49,12 @@ Point PolygonalChain::getPoint(long position) const {
     return vec.at(position);
 }
 
-double PolygonalChain::lenght(long i) const {
+long PolygonalChain::lenght(long i) const {
     return sqrt(pow(vec.at(i + 1).getX() - vec.at(i).getX(), 2) +
                 pow(vec.at(i + 1).getY() - vec.at(i).getY(), 2));
 }
 
-double PolygonalChain::perimeter() const {
+long PolygonalChain::perimeter() const {
     double result = 0;
     for (int i = 0; i < size - 1; ++i) {
         result += PolygonalChain::lenght(i);
@@ -70,7 +70,7 @@ ClosedPolygonalChain::ClosedPolygonalChain(long size, Point *array)
 ClosedPolygonalChain::ClosedPolygonalChain(const ClosedPolygonalChain &other)
         : PolygonalChain(other) {}
 
-double ClosedPolygonalChain::perimeter() const {
+long ClosedPolygonalChain::perimeter() const {
     double result = 0;
     for (int i = 0; i < size; ++i) {
         result += PolygonalChain::lenght(i);
@@ -90,7 +90,7 @@ Polygon &Polygon::operator=(const Polygon &other) {
     return *this;
 }
 
-double Polygon::area() const {
+long Polygon::area() const {
     double result = 0;
     for (int i = 0; i < size; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
@@ -158,11 +158,11 @@ RegularPolygon::RegularPolygon(long size, Point *array)
 RegularPolygon::RegularPolygon(const RegularPolygon &other)
         : Polygon(other) {}
 
-double RegularPolygon::perimeter() const {
+long RegularPolygon::perimeter() const {
     return PolygonalChain::lenght() * size;
 }
 
-double RegularPolygon::area() const {
+long RegularPolygon::area() const {
     long a = PolygonalChain::lenght() / (2 * tan(180 / size * 3.14 / 180));
     long perimeter = RegularPolygon::perimeter();
     return (a * perimeter) / 2;

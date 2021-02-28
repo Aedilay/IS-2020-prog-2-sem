@@ -23,8 +23,9 @@ long Point::getY() const {
     return y_;
 }
 
-PolygonalChain::PolygonalChain(long size, Point array[]) {
-    this->size = size;
+
+PolygonalChain::PolygonalChain(long size_, Point array[]) {
+    size = size_;
     for (int i = 0; i < size; i++) {
         vec.push_back(array[i]);
     }
@@ -48,13 +49,15 @@ Point PolygonalChain::getPoint(long position) const {
     return vec.at(position);
 }
 
+double PolygonalChain::lenght(long i) const {
+    return sqrt(pow(vec.at(i + 1).getX() - vec.at(i).getX(), 2) +
+                pow(vec.at(i + 1).getY() - vec.at(i).getY(), 2));
+}
+
 double PolygonalChain::perimeter() const {
     double result = 0;
     for (int i = 0; i < size - 1; ++i) {
-        Point point1 = vec.at(i);
-        Point point2 = vec.at(i + 1);
-        result += sqrt(
-                pow(point1.getX() - point2.getX(), 2) + pow(point1.getY() - point2.getY(), 2));
+        result += PolygonalChain::lenght(i);
     }
     return result;
 }
@@ -70,10 +73,7 @@ ClosedPolygonalChain::ClosedPolygonalChain(const ClosedPolygonalChain &other)
 double ClosedPolygonalChain::perimeter() const {
     double result = 0;
     for (int i = 0; i < size; ++i) {
-        Point point1 = vec.at(i);
-        Point point2 = vec.at(i + 1);
-        result += sqrt(
-                pow(point1.getX() - point2.getX(), 2) + pow(point1.getY() - point2.getY(), 2)); // формула длины отрезка
+        result += PolygonalChain::lenght(i);
     }
     return result;
 }
@@ -143,26 +143,27 @@ Trapezoid &Trapezoid::operator=(const Trapezoid &other) {
 }
 
 double Trapezoid::height() const {
-    double area = 0;
-    double a = 0;
-    double b = 0;
-    for (int i = 0; i < size; ++i) {
-        area += (vec.at(i + 1).getX() - vec.at(i).getX()) *
-                (vec.at(i + 1).getY() + vec.at(i).getY());
-        if (i == 1)
-            a = sqrt(pow((vec.at(i + 1).getX() - vec.at(i).getX()), 2) -
-                     pow((vec.at(i + 1).getY() - vec.at(i).getY()), 2));
-        if (i == 3)
-            b = sqrt(pow((vec.at(i + 1).getX() - vec.at(i).getX()), 2) -
-                     pow((vec.at(i + 1).getY() - vec.at(i).getY()), 2));
-    }
-    double result = std::abs(area) / (a + b);
+    double a = sqrt(pow((vec.at(2).getX() - vec.at(1).getX()), 2) -
+                    pow((vec.at(2).getY() - vec.at(1).getY()), 2));
+    double b = sqrt(pow((vec.at(4).getX() - vec.at(3).getX()), 2) -
+                    pow((vec.at(4).getY() - vec.at(3).getY()), 2));
+    double result = 2 * Polygon::area() / (a + b);
     return result;
 }
 
 RegularPolygon::RegularPolygon(long size, Point *array)
-        : Polygon(size, array) {}
+        : Polygon(size, array) {
+}
 
 RegularPolygon::RegularPolygon(const RegularPolygon &other)
         : Polygon(other) {}
 
+double RegularPolygon::perimeter() const {
+    return PolygonalChain::lenght() * size;
+}
+
+double RegularPolygon::area() const {
+    long a = PolygonalChain::lenght() / (2 * tan(180 / size * 3.14 / 180));
+    long perimeter = RegularPolygon::perimeter();
+    return (a * perimeter) / 2;
+}

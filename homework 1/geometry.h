@@ -40,6 +40,8 @@ public:
 
     [[nodiscard]] Point getPoint(long position) const;
 
+    [[nodiscard]] double lenght(long i = 0) const;
+
     [[nodiscard]] virtual double perimeter() const;
 };
 
@@ -88,7 +90,12 @@ public:
 class RegularPolygon : public Polygon {
 public:
     RegularPolygon(long size, Point array[]);
+
     RegularPolygon(const RegularPolygon &other);
+
+    [[nodiscard]] double perimeter() const override;
+
+    [[nodiscard]] double area() const override;
 };
 
 #endif //MAIN_CPP_GEOMETRY_H

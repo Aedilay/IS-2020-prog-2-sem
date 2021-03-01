@@ -1,6 +1,7 @@
 #ifndef MAIN_CPP_GEOMETRY_H
 #define MAIN_CPP_GEOMETRY_H
-# define M_PI
+#define M_PI
+
 #include <vector>
 #include <cmath>
 

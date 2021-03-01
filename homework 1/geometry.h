@@ -40,9 +40,9 @@ public:
 
     [[nodiscard]] Point getPoint(long position) const;
 
-    [[nodiscard]] long lenght(long i = 0) const;
+    [[nodiscard]] double lenght(long i = 0) const;
 
-    [[nodiscard]] virtual long perimeter() const;
+    [[nodiscard]] virtual double perimeter() const;
 };
 
 class ClosedPolygonalChain : public PolygonalChain {
@@ -51,7 +51,7 @@ public:
 
     ClosedPolygonalChain(const ClosedPolygonalChain &other);
 
-    [[nodiscard]] long perimeter() const override;
+    [[nodiscard]] double perimeter() const override;
 };
 
 class Polygon : public ClosedPolygonalChain {
@@ -93,7 +93,7 @@ public:
 
     RegularPolygon(const RegularPolygon &other);
 
-    [[nodiscard]] long perimeter() const override;
+    [[nodiscard]] double perimeter() const override;
 
     [[nodiscard]] double area() const override;
 };

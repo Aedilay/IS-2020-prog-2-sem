@@ -163,7 +163,7 @@ long RegularPolygon::perimeter() const {
 }
 
 double RegularPolygon::area() const {
-    double a = PolygonalChain::lenght() / (2 * tan(180 / size * M_PI / 180));
+    double a = PolygonalChain::lenght() / (2 * tan(180.0 / size * M_PI / 180));
     double perimeter = RegularPolygon::perimeter();
     return (a * perimeter) / 2;
 }

@@ -55,7 +55,7 @@ long PolygonalChain::lenght(long i) const {
 }
 
 long PolygonalChain::perimeter() const {
-    double result = 0;
+    long result = 0;
     for (int i = 0; i < size - 1; ++i) {
         result += PolygonalChain::lenght(i);
     }
@@ -71,7 +71,7 @@ ClosedPolygonalChain::ClosedPolygonalChain(const ClosedPolygonalChain &other)
         : PolygonalChain(other) {}
 
 long ClosedPolygonalChain::perimeter() const {
-    double result = 0;
+    long result = 0;
     for (int i = 0; i < size; ++i) {
         result += PolygonalChain::lenght(i);
     }
@@ -90,7 +90,7 @@ Polygon &Polygon::operator=(const Polygon &other) {
     return *this;
 }
 
-long Polygon::area() const {
+double Polygon::area() const {
     double result = 0;
     for (int i = 0; i < size; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
@@ -162,8 +162,8 @@ long RegularPolygon::perimeter() const {
     return PolygonalChain::lenght() * size;
 }
 
-long RegularPolygon::area() const {
-    long a = PolygonalChain::lenght() / (2 * tan(180 / size * 3.14 / 180));
-    long perimeter = RegularPolygon::perimeter();
+double RegularPolygon::area() const {
+    double a = PolygonalChain::lenght() / (2 * tan(180 / size * M_PI / 180));
+    double perimeter = RegularPolygon::perimeter();
     return (a * perimeter) / 2;
 }

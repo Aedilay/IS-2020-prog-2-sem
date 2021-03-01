@@ -1,6 +1,6 @@
 #ifndef MAIN_CPP_GEOMETRY_H
 #define MAIN_CPP_GEOMETRY_H
-
+# define M_PI
 #include <vector>
 #include <cmath>
 
@@ -60,7 +60,7 @@ public:
 
     Polygon(const Polygon &other);
 
-    [[nodiscard]] virtual long area() const;
+    [[nodiscard]] virtual double area() const;
 
     Polygon &operator=(const Polygon &polygonCopy);
 };
@@ -95,7 +95,7 @@ public:
 
     [[nodiscard]] long perimeter() const override;
 
-    [[nodiscard]] long area() const override;
+    [[nodiscard]] double area() const override;
 };
 
 #endif //MAIN_CPP_GEOMETRY_H

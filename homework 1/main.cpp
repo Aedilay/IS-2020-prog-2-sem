@@ -47,6 +47,7 @@ void PolygonsCheck() {
     assert(abs(trCopy.height() - 4) < EPS);
 }
 
+
 int main() {
     PointCheck();
     PolygonsCheck();

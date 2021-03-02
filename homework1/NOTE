@@ -1,0 +1,21 @@
+Cloning https://github.com/aedg1r/IS-2020-prog-2-sem/homework1
+Cloning finished
+It's OK
+In file included from geometry.cpp:1:
+geometry.h: In copy constructor 'PolygonalChain::PolygonalChain(const PolygonalChain&)':
+geometry.h:31:24: warning: 'PolygonalChain::vec' will be initialized after [-Wreorder]
+   31 |     std::vector<Point> vec;
+      |                        ^~~
+geometry.h:30:10: warning:   'long int PolygonalChain::size' [-Wreorder]
+   30 |     long size;
+      |          ^~~~
+geometry.cpp:34:1: warning:   when initialized here [-Wreorder]
+   34 | PolygonalChain::PolygonalChain(const PolygonalChain &other)
+      | ^~~~~~~~~~~~~~
+main.cpp: In function 'void PolygonsCheck()':
+main.cpp:47:12: warning: deleting object of polymorphic class type 'Trapezoid' which has non-virtual destructor might cause undefined behavior [-Wdelete-non-virtual-dtor]
+   47 |     delete trap;
+      |            ^~~~
+
+
+

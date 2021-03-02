@@ -24,9 +24,11 @@ public:
     [[nodiscard]] long getY() const;
 
 };
+//todo make default destructor
 
 class PolygonalChain {
 protected:
+    //todo you dont need size
     long size;
     std::vector<Point> vec;
 public:

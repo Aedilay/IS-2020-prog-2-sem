@@ -1,4 +1,5 @@
 #include "geometry.h"
+#include <iostream>
 #include <cassert>
 
 using namespace std;
@@ -18,8 +19,8 @@ void InheritancePolygonalChainCheck(const PolygonalChain *pc, const PolygonalCha
 }
 
 void PolygonsCheck() {
-    auto *a = new Point[3]{Point(0, 0), Point(3, 4), Point(3, 0)};
-    auto *b = new Point[4]{Point(0, 0), Point(1, 4), Point(3, 4), Point(3, 0)};
+    Point *a = new Point[3]{Point(0, 0), Point(3, 4), Point(3, 0)};
+    Point *b = new Point[4]{Point(0, 0), Point(1, 4), Point(3, 4), Point(3, 0)};
     const Polygon p(3, a);
     const Triangle t(3, a);
     const Trapezoid tr(4, b);
@@ -41,12 +42,11 @@ void PolygonsCheck() {
     Trapezoid tra(4, b);
     tra = tr;
     assert(abs(tra.height() - 4) < EPS);
-    auto* trap = new Trapezoid(4, b);
+    Trapezoid* trap = new Trapezoid(4, b);
     Trapezoid trCopy(*trap);
     delete trap;
     assert(abs(trCopy.height() - 4) < EPS);
 }
-
 
 int main() {
     PointCheck();

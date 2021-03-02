@@ -71,6 +71,7 @@ ClosedPolygonalChain::ClosedPolygonalChain(const ClosedPolygonalChain &other)
         : PolygonalChain(other) {}
 
 double ClosedPolygonalChain::perimeter() const {
+    //todo copy-paste from baseclass
     double result = 0;
     for (int i = 0; i < size; ++i) {
         result += PolygonalChain::lenght(i);
@@ -91,6 +92,7 @@ Polygon &Polygon::operator=(const Polygon &other) {
 }
 
 double Polygon::area() const {
+    //todo remove doubles
     double result = 0;
     for (int i = 0; i < size; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
@@ -111,6 +113,7 @@ Triangle &Triangle::operator=(const Triangle &other) {
     return *this;
 }
 
+//todo memory leak
 bool Triangle::hasRightAngle() const {
     auto *vector1 = new Point(vec.at(0).getX() - vec.at(1).getX(),
                               vec.at(0).getY() - vec.at(1).getY());
@@ -121,6 +124,7 @@ bool Triangle::hasRightAngle() const {
     auto *vector3 = new Point(vec.at(2).getX() - vec.at(0).getX(),
                               vec.at(2).getY() - vec.at(0).getY());
 
+    //todo return expression
     if (vector1->getX() * vector2->getX() - vector1->getY() * vector2->getY() == 0 ||
         vector2->getX() * vector3->getX() - vector2->getY() * vector3->getY() == 0 ||
         vector3->getX() * vector1->getX() - vector3->getY() * vector1->getY() == 0)
@@ -163,6 +167,7 @@ double RegularPolygon::perimeter() const {
 }
 
 double RegularPolygon::area() const {
+	//todo kek
     double a = PolygonalChain::lenght() / (2 * tan(180.0 / size * M_PI / 180));
     double perimeter = RegularPolygon::perimeter();
     return (a * perimeter) / 2;

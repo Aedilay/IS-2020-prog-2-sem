@@ -25,24 +25,28 @@ long Point::getY() const {
 
 
 PolygonalChain::PolygonalChain(long size_, Point array[]) {
-    size = size_;
-    for (int i = 0; i < size; i++) {
+    for (int i = 0; i < size_; i++) {
         vec.push_back(array[i]);
     }
 }
 
 PolygonalChain::PolygonalChain(const PolygonalChain &other)
-        : vec(other.vec),
-          size(other.size) {}
+        : vec(other.vec) {}
 
 PolygonalChain &PolygonalChain::operator=(const PolygonalChain &other) {
     vec = other.vec;
-    size = other.size;
     return *this;
 }
 
+PolygonalChain::~PolygonalChain() {
+    vec.clear();
+}
+
 long PolygonalChain::getN() const {
-    return size;
+    if (vec.at(0).getX() == vec.at(vec.size() - 1).getX() &&
+        vec.at(0).getY() == vec.at(vec.size() - 1).getY())
+        return (long) vec.size() - 1;
+    return vec.size();
 }
 
 Point PolygonalChain::getPoint(long position) const {
@@ -56,7 +60,7 @@ double PolygonalChain::lenght(long i) const {
 
 double PolygonalChain::perimeter() const {
     double result = 0;
-    for (int i = 0; i < size - 1; ++i) {
+    for (int i = 0; i < (int) vec.size() - 1; ++i) {
         result += PolygonalChain::lenght(i);
     }
     return result;
@@ -70,14 +74,6 @@ ClosedPolygonalChain::ClosedPolygonalChain(long size, Point *array)
 ClosedPolygonalChain::ClosedPolygonalChain(const ClosedPolygonalChain &other)
         : PolygonalChain(other) {}
 
-double ClosedPolygonalChain::perimeter() const {
-    double result = 0;
-    for (int i = 0; i < size; ++i) {
-        result += PolygonalChain::lenght(i);
-    }
-    return result;
-}
-
 Polygon::Polygon(long size, Point *array)
         : ClosedPolygonalChain(size, array) {}
 
@@ -86,16 +82,14 @@ Polygon::Polygon(const Polygon &other)
 
 Polygon &Polygon::operator=(const Polygon &other) {
     vec = other.vec;
-    size = other.size;
     return *this;
 }
 
 double Polygon::area() const {
-    double result = 0;
-    for (int i = 0; i < size; ++i)
+    long result = 0;
+    for (int i = 0; i < (int) vec.size() - 1; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
-    result = std::abs(result) / 2;
-    return result;
+    return (double) std::abs(result) / 2;
 }
 
 Triangle::Triangle(long size, Point *array)
@@ -107,26 +101,22 @@ Triangle::Triangle(const Triangle &other)
 
 Triangle &Triangle::operator=(const Triangle &other) {
     vec = other.vec;
-    size = other.size;
     return *this;
 }
 
 bool Triangle::hasRightAngle() const {
-    auto *vector1 = new Point(vec.at(0).getX() - vec.at(1).getX(),
-                              vec.at(0).getY() - vec.at(1).getY());
+    auto vector1 = Point(vec.at(0).getX() - vec.at(1).getX(),
+                         vec.at(0).getY() - vec.at(1).getY());
 
-    auto *vector2 = new Point(vec.at(1).getX() - vec.at(2).getX(),
-                              vec.at(1).getY() - vec.at(2).getY());
+    auto vector2 = Point(vec.at(1).getX() - vec.at(2).getX(),
+                         vec.at(1).getY() - vec.at(2).getY());
 
-    auto *vector3 = new Point(vec.at(2).getX() - vec.at(0).getX(),
-                              vec.at(2).getY() - vec.at(0).getY());
+    auto vector3 = Point(vec.at(2).getX() - vec.at(0).getX(),
+                         vec.at(2).getY() - vec.at(0).getY());
 
-    if (vector1->getX() * vector2->getX() - vector1->getY() * vector2->getY() == 0 ||
-        vector2->getX() * vector3->getX() - vector2->getY() * vector3->getY() == 0 ||
-        vector3->getX() * vector1->getX() - vector3->getY() * vector1->getY() == 0)
-        return true;
-
-    return false;
+    return (vector1.getX() * vector2.getX() - vector1.getY() * vector2.getY() == 0 ||
+            vector2.getX() * vector3.getX() - vector2.getY() * vector3.getY() == 0 ||
+            vector3.getX() * vector1.getX() - vector3.getY() * vector1.getY() == 0);
 }
 
 Trapezoid::Trapezoid(long size, Point *array)
@@ -138,7 +128,6 @@ Trapezoid::Trapezoid(const Trapezoid &other)
 
 Trapezoid &Trapezoid::operator=(const Trapezoid &other) {
     vec = other.vec;
-    size = other.size;
     return *this;
 }
 
@@ -159,11 +148,9 @@ RegularPolygon::RegularPolygon(const RegularPolygon &other)
         : Polygon(other) {}
 
 double RegularPolygon::perimeter() const {
-    return PolygonalChain::lenght() * size;
+    return PolygonalChain::lenght() * ((int) vec.size() - 1);
 }
 
 double RegularPolygon::area() const {
-    double a = PolygonalChain::lenght() / (2 * tan(180 / size * M_PI / 180));
-    double perimeter = RegularPolygon::perimeter();
-    return (a * perimeter) / 2;
+    return (getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN())));
 }

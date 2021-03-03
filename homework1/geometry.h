@@ -27,7 +27,6 @@ public:
 
 class PolygonalChain {
 protected:
-    long size;
     std::vector<Point> vec;
 public:
 
@@ -36,6 +35,8 @@ public:
     PolygonalChain(const PolygonalChain &polyChain);
 
     PolygonalChain &operator=(const PolygonalChain &polygonalChainCopy);
+
+    virtual ~PolygonalChain();
 
     [[nodiscard]] long getN() const;
 
@@ -51,8 +52,6 @@ public:
     ClosedPolygonalChain(long size, Point array[]);
 
     ClosedPolygonalChain(const ClosedPolygonalChain &other);
-
-    [[nodiscard]] double perimeter() const override;
 };
 
 class Polygon : public ClosedPolygonalChain {

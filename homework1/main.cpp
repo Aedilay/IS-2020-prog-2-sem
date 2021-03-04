@@ -46,7 +46,6 @@ void PolygonsCheck() {
     Trapezoid trCopy(*trap);
     delete trap;
     assert(abs(trCopy.height() - 4) < EPS);
-
 }
 
 int main() {

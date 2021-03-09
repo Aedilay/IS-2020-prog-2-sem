@@ -89,7 +89,7 @@ float Polygon::area() const {
     long result = 0;
     for (int i = 0; i < (int) vec.size() - 1; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
-    return (double) std::abs(result) / 2;
+    return (float) std::abs(result) / 2;
 }
 
 Triangle::Triangle(long size, Point *array)

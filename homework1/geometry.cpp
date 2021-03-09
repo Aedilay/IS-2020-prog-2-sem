@@ -152,5 +152,5 @@ double RegularPolygon::perimeter() const {
 }
 
 double RegularPolygon::area() const {
-    return (getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN())));
+    return getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN()));
 }

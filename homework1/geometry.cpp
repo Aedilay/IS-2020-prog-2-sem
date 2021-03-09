@@ -150,7 +150,7 @@ RegularPolygon::RegularPolygon(const RegularPolygon &other)
 double RegularPolygon::perimeter() const {
     return PolygonalChain::lenght() * ((int) vec.size() - 1);
 }
-
+//fixed kek
 double RegularPolygon::area() const {
     return getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN()));
 }

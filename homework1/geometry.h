@@ -24,7 +24,7 @@ public:
     [[nodiscard]] long getY() const;
 
 };
-
+//fixed remove size
 class PolygonalChain {
 protected:
     std::vector<Point> vec;

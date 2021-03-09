@@ -85,7 +85,7 @@ Polygon &Polygon::operator=(const Polygon &other) {
     return *this;
 }
 
-double Polygon::area() const {
+float Polygon::area() const {
     long result = 0;
     for (int i = 0; i < (int) vec.size() - 1; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
@@ -151,6 +151,6 @@ double RegularPolygon::perimeter() const {
     return PolygonalChain::lenght() * ((int) vec.size() - 1);
 }
 
-double RegularPolygon::area() const {
+float RegularPolygon::area() const {
     return (getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN())));
 }

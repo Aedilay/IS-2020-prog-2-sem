@@ -60,7 +60,7 @@ public:
 
     Polygon(const Polygon &other);
 
-    [[nodiscard]] virtual float area() const;
+    [[nodiscard]] virtual double area() const;
 
     Polygon &operator=(const Polygon &polygonCopy);
 };
@@ -95,7 +95,7 @@ public:
 
     [[nodiscard]] double perimeter() const override;
 
-    [[nodiscard]] float area() const override;
+    [[nodiscard]] double area() const override;
 };
 
 #endif //MAIN_CPP_GEOMETRY_H

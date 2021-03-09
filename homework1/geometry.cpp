@@ -85,11 +85,11 @@ Polygon &Polygon::operator=(const Polygon &other) {
     return *this;
 }
 
-float Polygon::area() const {
+double Polygon::area() const {
     long result = 0;
     for (int i = 0; i < (int) vec.size() - 1; ++i)
         result += (vec.at(i + 1).getX() - vec.at(i).getX()) * (vec.at(i + 1).getY() + vec.at(i).getY());
-    return (float) std::abs(result) / 2;
+    return (double) std::abs(result) / 2;
 }
 
 Triangle::Triangle(long size, Point *array)
@@ -151,6 +151,6 @@ double RegularPolygon::perimeter() const {
     return PolygonalChain::lenght() * ((int) vec.size() - 1);
 }
 
-float RegularPolygon::area() const {
+double RegularPolygon::area() const {
     return (getN() * pow(PolygonalChain::lenght(), 2) / (4 * tan(M_PI / getN())));
 }

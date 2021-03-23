@@ -189,12 +189,6 @@ Polynomial operator*(const Polynomial &poly1_, const Polynomial &poly2_) {
     return Polynomial(result_min, result_max, result_coeffs);
 }
 
-
-Polynomial &Polynomial::operator*=(const Polynomial &poly_) {
-    *this = *this * poly_;
-    return *this;
-}
-
 Polynomial operator*(const int &coef, const Polynomial &poly_) {
     int *result = new int[poly_.size];
     for (int i = 0; i < poly_.size; ++i) {

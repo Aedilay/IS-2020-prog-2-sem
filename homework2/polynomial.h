@@ -7,7 +7,7 @@
 #define INC_2_POLYNOMIAL_H
 
 class Polynomial {
-public:
+private:
     int size;
     int minPow;
     int maxPow;

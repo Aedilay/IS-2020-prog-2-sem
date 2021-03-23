@@ -57,6 +57,7 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
 }
 
 
+//todo not default
 Polynomial &Polynomial::operator=(const Polynomial &poly_) = default;
 
 Polynomial &Polynomial::operator+=(const Polynomial &poly_) {
@@ -203,9 +204,11 @@ Polynomial operator*(const Polynomial &poly2_, const int &coef) {
 }
 
 Polynomial &Polynomial::operator/=(const int &coef) {
+    //todo for_each
     for (int i = 0; i < size; ++i) {
         coefficents[i] /= coef;
     }
+    //todo make another function for it
     int i = 0;
     bool not_null = false;
     while (!not_null) {

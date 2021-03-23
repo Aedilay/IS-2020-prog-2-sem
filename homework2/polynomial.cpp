@@ -29,7 +29,7 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
     int min1 = poly1_.minPow;
     int max2 = poly2_.maxPow;
     int min2 = poly2_.minPow;
-    for (int i = poly1_.size; i > -1; --i) {
+    for (int i = poly1_.size - 1; i >= 0; --i) {
         if (poly1_.coefficents[i] == 0 && poly1_.minPow < poly1_.maxPow) {
             max1--;
         } else break;
@@ -38,7 +38,7 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
         if (poly1_.coefficents[i] == 0 && poly1_.minPow < poly1_.maxPow)
             min1++;
     }
-    for (int i = poly2_.size; i > -1; --i) {
+    for (int i = poly2_.size - 1; i >= 0; --i) {
         if (poly2_.coefficents[i] == 0 && poly2_.minPow < poly2_.maxPow) {
             max2--;
         } else break;
@@ -57,15 +57,7 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
 }
 
 
-Polynomial &Polynomial::operator=(const Polynomial &poly_) {
-    if (&poly_ != this) {
-        delete[] coefficents;
-        coefficents = poly_.coefficents;
-        maxPow = poly_.maxPow;
-        minPow = poly_.minPow;
-    }
-    return *this;
-}
+Polynomial &Polynomial::operator=(const Polynomial &poly_) = default;
 
 Polynomial &Polynomial::operator+=(const Polynomial &poly_) {
     if (poly_.coefficents == nullptr)

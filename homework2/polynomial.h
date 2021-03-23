@@ -28,7 +28,6 @@ public:
     friend Polynomial operator+(const Polynomial &poly1_, const Polynomial &poly2_);
     friend Polynomial operator-(const Polynomial &poly_);
     friend Polynomial operator/(const Polynomial &poly_, int coef);
-    Polynomial &operator*=(const int &coef);
     Polynomial &operator/=(const int &coef);
     friend std::istream &operator>>(std::istream &in, Polynomial &poly_);
     friend std::ostream &operator<<(std::ostream &out, const Polynomial &poly_);

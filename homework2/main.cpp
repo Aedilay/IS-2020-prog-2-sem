@@ -35,7 +35,7 @@ void PolynomialOperators() {
     assert(a + b + c == a + (b + c));
     assert(5 * a == a * 5);
     assert(a + b + c == Polynomial(-1, 2, new int[4]{1, -2, -1, 6}));
-    assert((c / 2)== Polynomial(0, 0, new int[1]{-1}));
+    assert((c / 2) == Polynomial(0, 0, new int[1]{-1}));
     assert(c.get(4) == -18.75);
     assert(a[1] == 2);
     assert(a[10] == 0);

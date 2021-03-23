@@ -8,10 +8,10 @@ Polynomial::Polynomial()
         : size(1), minPow(0), maxPow(0), coefficents(nullptr) {
 }
 
-int* duplicate_coeffs(const int* coeffs, int size) {
+int *duplicate_coeffs(const int *coeffs, int size) {
     if (coeffs == nullptr)
         return nullptr;
-    int* result = new int[size];
+    int *result = new int[size];
     for (int i = 0; i < size; ++i) {
         result[i] = coeffs[i];
     }
@@ -19,7 +19,8 @@ int* duplicate_coeffs(const int* coeffs, int size) {
 }
 
 Polynomial::Polynomial(const Polynomial &other)
-: size(other.size), minPow(other.minPow), maxPow(other.maxPow), coefficents(duplicate_coeffs(other.coefficents, other.size)) {}
+        : size(other.size), minPow(other.minPow), maxPow(other.maxPow),
+          coefficents(duplicate_coeffs(other.coefficents, other.size)) {}
 
 bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
     if (poly1_.coefficents == nullptr && poly2_.coefficents == nullptr)
@@ -257,9 +258,9 @@ Polynomial operator/(const Polynomial &poly_, int coef) {
 
 
 std::istream &operator>>(std::istream &in, Polynomial &poly_) {
-   in >> poly_.minPow;
-   in >> poly_.maxPow;
-   int* result = new int[poly_.size];
+    in >> poly_.minPow;
+    in >> poly_.maxPow;
+    int *result = new int[poly_.size];
     for (int i = 0; i < poly_.size; ++i) {
         in >> result[i];
     }
@@ -268,8 +269,8 @@ std::istream &operator>>(std::istream &in, Polynomial &poly_) {
 }
 
 int &Polynomial::operator[](const int coef) {
-    if (coef > maxPow){
-        int* result_coeffs = new int[coef - minPow + 1];
+    if (coef > maxPow) {
+        int *result_coeffs = new int[coef - minPow + 1];
         for (int i = 0; i < size; ++i) {
             result_coeffs[i] = coefficents[i];
         }
@@ -291,7 +292,7 @@ int Polynomial::operator[](int coef) const {
     return coefficents[coef];
 }
 
-bool operator!=(const Polynomial &poly1_, const Polynomial &poly2_){
+bool operator!=(const Polynomial &poly1_, const Polynomial &poly2_) {
     return !(poly2_ == poly1_);
 }
 
@@ -303,8 +304,8 @@ bool operator!=(const Polynomial &poly1_, const Polynomial &poly2_){
     return result;
 }
 
-Polynomial operator-(const Polynomial &poly_){
-    int* result = new int[poly_.size];
+Polynomial operator-(const Polynomial &poly_) {
+    int *result = new int[poly_.size];
     for (int i = 0; i < poly_.size; ++i) {
         result[i] = -poly_.coefficents[i];
     }

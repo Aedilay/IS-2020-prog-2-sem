@@ -21,7 +21,9 @@ public:
 
     Polynomial();
 
-    Polynomial &RemoveZero();
+    Polynomial &plusOrMinus(bool isNegative, const Polynomial &poly_);
+
+    Polynomial &removeZero();
 
     [[nodiscard]] double get(int root) const;
 
@@ -32,8 +34,6 @@ public:
     friend bool operator!=(const Polynomial &poly1_, const Polynomial &poly2_);
 
     Polynomial &operator+=(const Polynomial &poly_);
-
-    //todo -=
 
     friend Polynomial operator*(const Polynomial &poly1_, const Polynomial &poly2_);
 
@@ -46,6 +46,8 @@ public:
     friend Polynomial operator+(const Polynomial &poly1_, const Polynomial &poly2_);
 
     friend Polynomial operator-(const Polynomial &poly_);
+
+    //fixed -=
 
     Polynomial &operator-=(const Polynomial &poly_);
 

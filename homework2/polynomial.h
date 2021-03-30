@@ -33,8 +33,6 @@ public:
 
     Polynomial &operator+=(const Polynomial &poly_);
 
-    //todo -=
-
     friend Polynomial operator*(const Polynomial &poly1_, const Polynomial &poly2_);
 
     friend Polynomial operator*(const int &coef, const Polynomial &poly2_);
@@ -46,6 +44,8 @@ public:
     friend Polynomial operator+(const Polynomial &poly1_, const Polynomial &poly2_);
 
     friend Polynomial operator-(const Polynomial &poly_);
+
+    //todo -= - fixed
 
     Polynomial &operator-=(const Polynomial &poly_);
 

@@ -2,7 +2,6 @@
 #include <utility>
 #include <string>
 #include <cmath>
-#include <algorithm>
 
 #ifndef INC_2_POLYNOMIAL_H
 #define INC_2_POLYNOMIAL_H

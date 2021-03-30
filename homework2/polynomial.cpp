@@ -212,14 +212,13 @@ Polynomial operator*(const Polynomial &poly2_, const int &coef) {
 }
 
 Polynomial &Polynomial::operator/=(const int &coef) {
-    //todo for_each - fixed
     auto division = [coef](int &n) { n /= coef; };
     std::for_each(coefficents, coefficents + size, division);
-    //todo make another function for it - fixed
     RemoveZero();
     return *this;
 }
 
+//todo methods not from capital letter
 Polynomial &Polynomial::RemoveZero(){
     int i = 0;
     bool not_null = false;
@@ -313,7 +312,7 @@ Polynomial operator-(const Polynomial &poly_) {
     return Polynomial(poly_.minPow, poly_.maxPow, result);
 }
 
-//todo -= - fixed
+//todo copy-paste from +=
 Polynomial &Polynomial::operator-=(const Polynomial &poly_) {
     if (poly_.coefficents == nullptr)
         return *this;
@@ -365,6 +364,7 @@ Polynomial &Polynomial::operator-=(const Polynomial &poly_) {
     return *this;
 }
 
+//todo change todo to fixed, not add it
 Polynomial operator-(const Polynomial &poly1_, const Polynomial &poly2_) {
     Polynomial result = poly1_;
     result -= poly2_;

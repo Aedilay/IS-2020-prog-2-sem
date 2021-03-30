@@ -45,7 +45,6 @@ public:
 
     friend Polynomial operator-(const Polynomial &poly_);
 
-    //todo -= - fixed
 
     Polynomial &operator-=(const Polynomial &poly_);
 

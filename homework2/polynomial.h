@@ -2,6 +2,7 @@
 #include <utility>
 #include <string>
 #include <cmath>
+#include <algorithm>
 
 #ifndef INC_2_POLYNOMIAL_H
 #define INC_2_POLYNOMIAL_H
@@ -18,6 +19,8 @@ public:
     Polynomial(const Polynomial &other);
 
     Polynomial();
+
+    Polynomial &RemoveZero();
 
     [[nodiscard]] double get(int root) const;
 
@@ -40,6 +43,10 @@ public:
     friend Polynomial operator+(const Polynomial &poly1_, const Polynomial &poly2_);
 
     friend Polynomial operator-(const Polynomial &poly_);
+
+    Polynomial &operator-=(const Polynomial &poly_);
+
+    friend Polynomial operator-(const Polynomial &poly1_, const Polynomial &poly2_);
 
     friend Polynomial operator/(const Polynomial &poly_, int coef);
 

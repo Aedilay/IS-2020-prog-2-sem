@@ -56,8 +56,16 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
     return true;
 }
 
-
-Polynomial &Polynomial::operator=(const Polynomial &poly_) = default;
+//todo not default - fixed
+Polynomial &Polynomial::operator=(const Polynomial &poly_) {
+    if (this != &poly_) {
+        coefficents = poly_.coefficents;
+        minPow = poly_.minPow;
+        maxPow = poly_.maxPow;
+        return *this;
+    }
+    return *this;
+}
 
 Polynomial &Polynomial::operator+=(const Polynomial &poly_) {
     if (poly_.coefficents == nullptr)
@@ -203,9 +211,15 @@ Polynomial operator*(const Polynomial &poly2_, const int &coef) {
 }
 
 Polynomial &Polynomial::operator/=(const int &coef) {
-    for (int i = 0; i < size; ++i) {
-        coefficents[i] /= coef;
-    }
+    //todo for_each - fixed
+    auto division = [coef](int &n) { n /= coef; };
+    std::for_each(coefficents, coefficents + size, division);
+    //todo make another function for it - fixed
+    RemoveZero();
+    return *this;
+}
+
+Polynomial &Polynomial::RemoveZero(){
     int i = 0;
     bool not_null = false;
     while (!not_null) {
@@ -298,3 +312,60 @@ Polynomial operator-(const Polynomial &poly_) {
     return Polynomial(poly_.minPow, poly_.maxPow, result);
 }
 
+//todo -= - fixed
+Polynomial &Polynomial::operator-=(const Polynomial &poly_) {
+    if (poly_.coefficents == nullptr)
+        return *this;
+    else if (coefficents == nullptr) {
+        delete[] coefficents;
+        *this = -poly_;
+        return *this;
+    }
+    bool equal_min = false;
+    bool not_equal = false;
+    int result_min = std::min(minPow, poly_.minPow);
+    int result_max = std::max(maxPow, poly_.maxPow);
+    int counter_min = abs(minPow - poly_.minPow);
+    int counter_max = result_max - result_min - counter_min + 1 - std::abs(maxPow - poly_.maxPow);
+    int *result_coeff = new int[result_max - result_min + 1];
+    int k = 0;
+    for (int i = 0; i < result_max - result_min + 1; ++i) {
+        if (i == counter_min)
+            equal_min = true;
+        if (k > counter_max)
+            not_equal = true;
+        if (!equal_min) {
+            if (minPow < poly_.minPow)
+                result_coeff[i] = coefficents[i];
+            else
+                result_coeff[i] = -poly_.coefficents[i];
+        } else if (!not_equal) {
+            if (minPow < poly_.minPow) {
+                result_coeff[i] = coefficents[i] - poly_.coefficents[k];
+                k++;
+            } else {
+                result_coeff[i] = coefficents[k] - poly_.coefficents[i];
+                k++;
+            }
+        } else {
+            if (maxPow > poly_.maxPow) {
+                result_coeff[i] = coefficents[k];
+                k++;
+            } else {
+                result_coeff[i] = -poly_.coefficents[k];
+                k++;
+            }
+        }
+    }
+    delete[] coefficents;
+    coefficents = result_coeff;
+    minPow = result_min;
+    maxPow = result_max;
+    return *this;
+}
+
+Polynomial operator-(const Polynomial &poly1_, const Polynomial &poly2_) {
+    Polynomial result = poly1_;
+    result -= poly2_;
+    return result;
+}

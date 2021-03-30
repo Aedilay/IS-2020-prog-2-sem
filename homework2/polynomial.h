@@ -7,6 +7,7 @@
 #ifndef INC_2_POLYNOMIAL_H
 #define INC_2_POLYNOMIAL_H
 
+
 class Polynomial {
 private:
     int size;

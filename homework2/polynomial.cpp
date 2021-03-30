@@ -1,5 +1,6 @@
 #include "polynomial.h"
 
+
 Polynomial::Polynomial(int min, int max, int *pointer)
         : size(max - min + 1), minPow(min), maxPow(max), coefficents(pointer) {
 }

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/main.cpp
+iostream
+-
+pugixml/src/pugixml.hpp
+C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml/src/pugixml.hpp
+
+C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml/src/pugiconfig.hpp
+
+C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml/src/pugixml.hpp
+pugiconfig.hpp
+C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml/src/pugiconfig.hpp
+stddef.h
+-
+exception
+-
+iterator
+-
+iosfwd
+-
+string
+-
+

@@ -1,5 +1,6 @@
 file(REMOVE_RECURSE
   "CMakeFiles/homework3.dir/main.cpp.obj"
+  "CMakeFiles/homework3.dir/pugixml.cpp.obj"
   "homework3.exe"
   "homework3.exe.manifest"
   "homework3.pdb"

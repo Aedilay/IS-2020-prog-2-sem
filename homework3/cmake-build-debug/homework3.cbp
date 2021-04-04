@@ -83,6 +83,12 @@
 		<Unit filename="C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/main.cpp">
 			<Option target="homework3"/>
 		</Unit>
+		<Unit filename="C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml.cpp">
+			<Option target="homework3"/>
+		</Unit>
+		<Unit filename="C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/pugixml.hpp">
+			<Option target="homework3"/>
+		</Unit>
 		<Unit filename="C:/Labs/Y1S2/Proga (C++)/3/IS-2020-prog-2-sem/homework3/CMakeLists.txt">
 			<Option virtualFolder="CMake Files\"/>
 		</Unit>

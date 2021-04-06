@@ -66,4 +66,5 @@ public:
     int operator[](int) const;
 };
 
+
 #endif //INC_2_POLYNOMIAL_H

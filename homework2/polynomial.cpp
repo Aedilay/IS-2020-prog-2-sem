@@ -60,6 +60,7 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
 //fixed not default
 Polynomial &Polynomial::operator=(const Polynomial &poly_) {
     if (this != &poly_) {
+        //todo should copying arguments
         coefficents = poly_.coefficents;
         minPow = poly_.minPow;
         maxPow = poly_.maxPow;
@@ -128,6 +129,7 @@ std::ostream &operator<<(std::ostream &out, const Polynomial &poly_) {
     return out;
 }
 
+//todo * from *=
 Polynomial &Polynomial::operator*=(const Polynomial &poly_){
     *this = *this * poly_;
     return *this;

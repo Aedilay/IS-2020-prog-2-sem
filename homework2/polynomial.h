@@ -9,7 +9,7 @@
 
 
 class Polynomial {
-private:
+public:
     int size;
     int minPow;
     int maxPow;

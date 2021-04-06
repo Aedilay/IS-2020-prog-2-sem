@@ -58,13 +58,26 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
 }
 
 //fixed not default
-Polynomial &Polynomial::operator=(const Polynomial &poly_) {
-    //fixed should copying arguments
-    if (this != &poly_) {
-        *this = poly_;
+Polynomial &Polynomial::operator=(const Polynomial &poly) {
+    if (this == &poly) {
+        return *this;
+    } else if (poly.coefficents == nullptr){
+        delete[] coefficents;
+        coefficents = nullptr;
+        return *this;
+    } else{
+        //fixed should copying arguments
+        size = poly.size;
+        int *new_coeffs = new int[poly.size];
+        for (int i = 0; i < poly.size; i++) {
+            new_coeffs[i] = poly.coefficents[i];
+        }
+        delete[] coefficents;
+        coefficents = new_coeffs;
+        minPow = poly.minPow;
+        maxPow = poly.maxPow;
         return *this;
     }
-    return *this;
 }
 
 
@@ -127,28 +140,36 @@ std::ostream &operator<<(std::ostream &out, const Polynomial &poly_) {
     return out;
 }
 
+//fixed * from *=
 Polynomial &Polynomial::operator*=(const Polynomial &poly_){
-    *this = *this * poly_;
-    return *this;
-}
-
-Polynomial operator*(const Polynomial &poly1_, const Polynomial &poly2_) {
-    if (poly1_.coefficents == nullptr || poly2_.coefficents == nullptr) {
-        return Polynomial();
+    if (coefficents == nullptr || poly_.coefficents == nullptr) {
+        *this = Polynomial();
+        return *this;
     }
-    int result_min = poly1_.minPow + poly2_.minPow;
-    int result_max = poly1_.maxPow + poly2_.maxPow;
+    int result_min = minPow + poly_.minPow;
+    int result_max = maxPow + poly_.maxPow;
     int res_size = result_max - result_min + 1;
     int *result_coeffs = new int[res_size];
     for (int i = 0; i < res_size; ++i) {
         result_coeffs[i] = 0;
     }
-    for (int i = poly1_.size - 1; i >= 0; i--) {
-        for (int j = poly2_.size - 1; j >= 0; j--) {
-            result_coeffs[i + j] += poly1_.coefficents[i] * poly2_.coefficents[j];
+    for (int i = size - 1; i >= 0; i--) {
+        for (int j = poly_.size - 1; j >= 0; j--) {
+            result_coeffs[i + j] += coefficents[i] * poly_.coefficents[j];
         }
     }
-    return Polynomial(result_min, result_max, result_coeffs);
+    size = res_size;
+    delete[] coefficents;
+    minPow = result_min;
+    maxPow = result_max;
+    coefficents = result_coeffs;
+    return *this;
+}
+
+Polynomial operator*(const Polynomial &poly1_, const Polynomial &poly2_) {
+    auto result = Polynomial(poly1_);
+    result *= poly2_;
+    return result;
 }
 
 Polynomial operator*(const int &coef, const Polynomial &poly_) {

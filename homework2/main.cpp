@@ -50,7 +50,6 @@ void PolynomialOperators() {
 }
 
 
-
 int main() {
     checkOut();
     PolynomialOperators();

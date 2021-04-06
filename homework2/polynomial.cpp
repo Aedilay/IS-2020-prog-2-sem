@@ -381,5 +381,4 @@ Polynomial operator-(const Polynomial &poly1_, const Polynomial &poly2_) {
     Polynomial result = poly1_;
     result -= poly2_;
     return result;
-
 }

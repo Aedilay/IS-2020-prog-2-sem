@@ -59,10 +59,9 @@ bool operator==(const Polynomial &poly1_, const Polynomial &poly2_) {
 
 //fixed not default
 Polynomial &Polynomial::operator=(const Polynomial &poly_) {
+    //fixed should copying arguments
     if (this != &poly_) {
-        coefficents = poly_.coefficents;
-        minPow = poly_.minPow;
-        maxPow = poly_.maxPow;
+        *this = poly_;
         return *this;
     }
     return *this;

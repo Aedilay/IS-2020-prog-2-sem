@@ -76,13 +76,13 @@ void longestRoute(xml_node &timetable) {
     for (auto &each: routesAndCoords) {
         for (auto &res: each.second) {
             result.first = each.first;
-            double x2 = res.second[0].second;
-            double x1 = res.second[0].first;
+            double x = res.second[0].second;
+            double y = res.second[0].first;
             double sum = 0;
             for (auto coords: res.second) {
-                sum += sqrt(pow(x2 - x1, 2) + pow(coords.second - coords.first, 2));
-                x1 = coords.first;
-                x2 = coords.second;
+                sum += sqrt(pow(x - coords.second, 2) + pow(y - coords.first, 2));
+                y = coords.first;
+                x = coords.second;
             }
             result.second = compare(result.second, sum, res.first);
         }

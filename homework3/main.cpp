@@ -28,11 +28,12 @@ vector<string> createRoutes(xml_node data){
 }
 
 pair<string, double> compare(pair<string, double> comp, double result, string change) {
-    if (comp.second < result) {
-        comp.second = result;
-        comp.first = std::move(change);
+    auto [route, res] = std::move(comp);
+    if (res < result) {
+        res = result;
+        route = std::move(change);
     }
-    return comp;
+    return std::make_pair(route, res);
 }
 
 void routeWithMaxStops(xml_node timetable) {
@@ -45,14 +46,14 @@ void routeWithMaxStops(xml_node timetable) {
     }
     pair <string, pair <string, int>> result;
     cout << "\nМаршруты с наибольшим количеством остановок:" << endl;
-    for (auto &each: routeAndStops) {
-        for(auto &res: each.second){
-            result.first = each.first;
-            result.second = compare(result.second, res.second, res.first);
+    for (auto &[trasport, otherPair]: routeAndStops) {
+        auto [resultTransport, pair] = result;
+        resultTransport = trasport;
+        for(auto &[route, stops]: otherPair){
+            pair = compare(pair, stops, route);
         }
-        cout << result.first << " " << result.second.first << " " << result.second.second << endl;
-        result.second.first = "";
-        result.second.second = 0;
+        auto [resultRoute, maxStops] = pair;
+        cout << resultTransport << " " << resultRoute << " " << maxStops << endl;
     }
 }
 
@@ -63,32 +64,36 @@ void longestRoute(xml_node &timetable) {
         pair<double, double> pairCords;
         auto ss = istringstream(coords);
         string line;
+        auto[coord1, coord2] = pairCords;
         getline(ss, line, ',');
-        pairCords.first = stod(line);
+        coord1 = stod(line);
         getline(ss, line, ',');
-        pairCords.second = stod(line);
+        coord2 = stod(line);
+        pairCords = std::make_pair(coord1, coord2);
         vector<string> routes = createRoutes(data);
         for (auto &route: routes)
             routesAndCoords[data.child("type_of_vehicle").text().as_string()][route].push_back(pairCords);
     }
     pair<string, pair<string, double>> result;
     cout << "\nНаиболее длинные маршруты:" << endl;
-    for (auto &each: routesAndCoords) {
-        for (auto &res: each.second) {
-            result.first = each.first;
-            double x = res.second[0].second;
-            double y = res.second[0].first;
+    for (auto &[trasport, otherPair]: routesAndCoords) {
+        auto [resultTransport, pair] = result;
+        resultTransport = trasport;
+        for (auto &[route, dist]: otherPair) {
+            auto[x_, y_] = dist[0];
+            double x = x_;
+            double y = y_;
             double sum = 0;
-            for (auto coords: res.second) {
-                sum += sqrt(pow(x - coords.second, 2) + pow(y - coords.first, 2));
-                y = coords.first;
-                x = coords.second;
+            for (auto[coord1, coord2]: dist) {
+                sum += sqrt(pow(x - coord2, 2) + pow(y - coord1, 2));
+                y = coord1;
+                x = coord2;
             }
-            result.second = compare(result.second, sum, res.first);
+            pair = compare(pair, sum, route);
         }
-        cout << result.first << ' ' << result.second.first << ' ' << result.second.second << endl;
-        result.second.first = "";
-        result.second.second = 0;
+        auto [resultRoute, resultDist] = pair;
+        cout << resultTransport << ' ' << resultRoute << ' ' << resultDist << endl;
+        resultDist = 0;
     }
 }
 
@@ -109,11 +114,12 @@ void streetWithMaxStops(xml_node timetable) {
         }
     }
     pair<string, int> result;
-    for (auto &each: stops){
-        result = compare(result, each.second, each.first);
+    for (auto &[street, num]: stops){
+        result = compare(result, num, street);
     }
+    auto [resultStreet, resultNum] = result;
     cout << endl;
-    cout << "Улица с наибольшим числом остановок:" << '\n' << result.first << ' ' << result.second << endl;
+    cout << "Улица с наибольшим числом остановок:" << '\n' << resultStreet << ' ' << resultNum << endl;
 }
 
 

@@ -1,0 +1,30 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Labs/Y1S2/Proga (C++)/4/IS-2020-prog-2-sem/homework4/main.cpp
+predicate.hpp
+C:/Labs/Y1S2/Proga (C++)/4/IS-2020-prog-2-sem/homework4/predicate.hpp
+iostream
+-
+sstream
+-
+assert.h
+-
+vector
+-
+set
+-
+iterator
+-
+functional
+-
+
+C:/Labs/Y1S2/Proga (C++)/4/IS-2020-prog-2-sem/homework4/predicate.hpp
+iostream
+-
+

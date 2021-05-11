@@ -76,7 +76,7 @@ bool isPartitioned(iterator current, iterator end, const predicate &function){
 }
 
 template<typename iterator, typename element>
-iterator findNot(iterator current, iterator end, const element &elem){
+iterator findNot(iterator current, [[maybe_unused]] iterator end, const element &elem){
     while(*current == elem){
         ++current;
     }
@@ -86,7 +86,7 @@ iterator findNot(iterator current, iterator end, const element &elem){
 template<typename iterator, typename element>
 iterator findBackward(iterator current, iterator end, const element &elem){
     iterator found = end;
-    while(*current != *end){
+    while(current != end){
         if (*current == elem){
             found = current;
         }
@@ -97,7 +97,7 @@ iterator findBackward(iterator current, iterator end, const element &elem){
 
 template<typename iterator, typename predicate>
 bool isPalindrome(iterator current, iterator end, const predicate &function){
-    while(*current != *end){
+    while(current != end){
         --end;
         if(!function(*current, *end))
            return false;

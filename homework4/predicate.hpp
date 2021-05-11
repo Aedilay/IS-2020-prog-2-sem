@@ -12,7 +12,7 @@ bool allOf(iterator current, iterator end, const predicate &function){
     return true;
 }
 
-template<class iterator, class predicate>
+template<typename iterator, typename predicate>
 bool anyOf(iterator current, iterator end, const predicate &function){
     while(current != end){
         if (function(*current))
@@ -22,7 +22,7 @@ bool anyOf(iterator current, iterator end, const predicate &function){
     return false;
 }
 
-template<class iterator, class predicate>
+template<typename iterator, typename predicate>
 bool noneOf(iterator current, iterator end, const predicate &function){
     while(current != end){
         if (function(*current))
@@ -32,7 +32,7 @@ bool noneOf(iterator current, iterator end, const predicate &function){
     return true;
 }
 
-template<class iterator, class predicate>
+template<typename iterator, typename predicate>
 bool oneOf(iterator current, iterator end, const predicate &function){
     int count = 0;
     while(current != end){
@@ -45,7 +45,7 @@ bool oneOf(iterator current, iterator end, const predicate &function){
     return false;
 }
 
-template<class iterator, class predicate = std::less<>>
+template<typename iterator, typename predicate = std::less<>>
 bool isSorted(iterator current, iterator end, const predicate &function = predicate()){
     iterator prev = current;
     current++;
@@ -58,7 +58,7 @@ bool isSorted(iterator current, iterator end, const predicate &function = predic
     return true;
 }
 
-template<class iterator, class predicate>
+template<typename iterator, typename predicate>
 bool isPartitioned(iterator current, iterator end, const predicate &function){
     bool condition = function(*current);
     bool hasChanged = false;
@@ -75,7 +75,7 @@ bool isPartitioned(iterator current, iterator end, const predicate &function){
     return true;
 }
 
-template<class iterator, class element>
+template<typename iterator, typename element>
 iterator findNot(iterator current, iterator end, const element &elem){
     while(*current == elem){
         ++current;
@@ -83,7 +83,7 @@ iterator findNot(iterator current, iterator end, const element &elem){
     return current;
 }
 
-template<class iterator, class element>
+template<typename iterator, typename element>
 iterator findBackward(iterator current, iterator end, const element &elem){
     iterator found = end;
     while(*current != *end){
@@ -95,7 +95,7 @@ iterator findBackward(iterator current, iterator end, const element &elem){
     return found;
 }
 
-template<class iterator, class predicate>
+template<typename iterator, typename predicate>
 bool isPalindrome(iterator current, iterator end, const predicate &function){
     while(*current != *end){
         --end;

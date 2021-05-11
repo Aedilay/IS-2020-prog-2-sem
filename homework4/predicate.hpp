@@ -45,25 +45,12 @@ bool oneOf(iterator current, iterator end, const predicate &function){
     return false;
 }
 
-template<class iterator, class predicate>
-bool isSorted(iterator current, iterator end, const predicate &function){
+template<class iterator, class predicate = std::less<>>
+bool isSorted(iterator current, iterator end, const predicate &function = predicate()){
     iterator prev = current;
     current++;
     while(current != end){
         if (!function(*prev, *current))
-            return false;
-        ++current;
-        ++prev;
-    }
-    return true;
-}
-
-template<class iterator>
-bool isSorted(iterator current, iterator end){
-    iterator prev = current;
-    current++;
-    while(current != end){
-        if (*prev > *current)
             return false;
         ++current;
         ++prev;

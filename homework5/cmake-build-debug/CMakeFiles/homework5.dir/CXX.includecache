@@ -1,0 +1,32 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/CircularBuffer.hpp
+
+C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/main.cpp
+iostream
+-
+sstream
+-
+vector
+-
+tuple
+-
+utility
+-
+algorithm
+-
+string
+-
+exception
+-
+cassert
+-
+CircularBuffer.hpp
+C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/CircularBuffer.hpp
+

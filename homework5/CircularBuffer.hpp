@@ -10,33 +10,27 @@ public:
     T *data;
 
     class customIterator {
-    public:
-        T *myPointer;
-        T *ptrBegin;
-        T *ptrEnd;
-        T *arrayEnd;
+    private:
         T *arrayStart;
-        int difference = 0;
-        int diff = 1;
-        int negativeDiff = 0;
+        T *arrayEnd;
+        T *myPointer;
+        T* countPointer;
+        int difference;
     public:
         using iterator_category [[maybe_unused]] = std::random_access_iterator_tag;
         using value_type [[maybe_unused]] = T;
-        using difference_type [[maybe_unused]] = ptrdiff_t;
+        using difference_type [[maybe_unused]] = int;
         using pointer [[maybe_unused]] = T *;
         using reference = T &;
 
-        explicit customIterator(T *givenPointer, T *startingPoint, T *endingPoint, T *endOfArray, T *startOfArray) : myPointer(givenPointer),
-                                                                                     ptrEnd(endingPoint),
-                                                                                     ptrBegin(startingPoint),
-                                                                                     arrayEnd(endOfArray),
-                                                                                     arrayStart(startOfArray){
-            if (myPointer > arrayStart)
-                negativeDiff++;
-        }
+        explicit customIterator(T *startOfArray, T *endOfArray, T *ptr, T* counter, difference_type diff) : arrayStart(startOfArray),
+                                                                          arrayEnd(endOfArray),
+                                                                          myPointer(ptr),
+                                                                          countPointer(counter),
+                                                                          difference(diff){}
 
         bool operator!=(customIterator givenIterator) {
-            return myPointer != givenIterator.myPointer;
+            return countPointer != givenIterator.countPointer;
         }
 
         bool operator==(customIterator someIterator) {
@@ -44,49 +38,62 @@ public:
         }
 
         bool operator<(customIterator someIterator) {
-            return myPointer < someIterator.myPointer;
+            return difference < someIterator.difference;
         }
 
         bool operator>(customIterator someIterator) {
-            return myPointer > someIterator.myPointer;
+            return difference > someIterator.difference;
         }
 
         customIterator &operator--() {
             myPointer--;
+            difference--;
+            countPointer--;
             return *this;
         }
 
         difference_type operator+(customIterator someIterator) {
-            return myPointer + someIterator.myPointer;
+            return difference + someIterator.difference;
         }
 
         difference_type operator-(customIterator someIterator) {
-            return myPointer - someIterator.myPointer;
+            return difference - someIterator.difference;
         }
 
-        customIterator operator-(difference_type someIterator) {
-            return customIterator(myPointer - someIterator, ptrBegin, ptrEnd, arrayEnd, arrayStart);
+        customIterator operator-(difference_type someDiffer) {
+            difference_type tempDiffer = difference - someDiffer;
+            if (myPointer - someDiffer < arrayStart){
+                difference_type temp = myPointer - arrayStart;
+                someDiffer -= temp;
+                return customIterator(arrayStart, arrayEnd, arrayEnd - someDiffer, countPointer, tempDiffer);
+            }
+            else return customIterator(arrayStart, arrayEnd, myPointer - someDiffer, countPointer, tempDiffer);
         }
 
-        customIterator operator+(difference_type someIterator) {
-            return customIterator(myPointer + someIterator, ptrBegin, ptrEnd, arrayEnd, arrayStart);
+        customIterator operator+(difference_type someDiffer) {
+            difference_type tempDiffer = difference + someDiffer;
+            if (myPointer + someDiffer > arrayEnd){
+                difference_type temp = arrayEnd - myPointer;
+                someDiffer -= temp;
+                return customIterator(arrayStart, arrayEnd, arrayEnd + someDiffer, countPointer, tempDiffer);
+            }
+            else return customIterator(arrayStart, arrayEnd, myPointer + someDiffer, countPointer, tempDiffer);
         }
 
         customIterator &operator++() {
-            ++myPointer;
-            if (ptrBegin + diff < arrayEnd)
-                diff++;
-            else {
-                negativeDiff++;
-                diff++;
+            ++countPointer;
+            ++difference;
+            if(myPointer == arrayEnd - 1){
+                myPointer = arrayStart;
+                return *this;
+            } else {
+                ++myPointer;
+                return *this;
             }
-            return *this;
         }
 
         reference operator*() {
-            if (ptrBegin + diff < arrayEnd && myPointer < arrayEnd)
-            return * (ptrBegin + diff);
-            else return * (arrayStart + negativeDiff);
+            return *myPointer;
         }
     };
 
@@ -185,12 +192,12 @@ public:
 
     customIterator begin() const {
         if (tail != capacity - 1)
-            return customIterator(&data[capacity - size], &data[head], &data[tail + 1], &(data[capacity]), data);
-        else return customIterator(&data[capacity - size], &data[head], &data[0], &(data[capacity]), data);
+            return customIterator(data, &data[capacity], &data[tail + 1], &data[capacity - size], 0);
+        else return customIterator(data, &data[capacity], &data[0], &data[capacity - size], 0);
     }
 
     customIterator end() const {
-        return customIterator(&(data[capacity]), &data[head], &data[tail + 1], &(data[capacity]), data);
+        return customIterator(data, &data[capacity], &data[head], &data[capacity], size);
     }
 
     T &operator[](size_t position) const {

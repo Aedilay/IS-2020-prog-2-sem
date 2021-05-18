@@ -190,6 +190,7 @@ int main(){
     print<ss>(c);
     sort(c.begin(), c.end());
     print<ss>(c);
+    //cout << c[0] << " " << c[1] << " " << c[2] << " " << c[3] << " " << c[4];
     callAssert(equal_to<>(), ss.str(), "4 3 2 1\n"
                                        "\n"
                                        "5 4 3 2\n"

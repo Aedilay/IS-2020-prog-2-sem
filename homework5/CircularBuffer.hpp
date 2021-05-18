@@ -52,10 +52,6 @@ public:
             return *this;
         }
 
-        difference_type operator+(customIterator someIterator) {
-            return difference + someIterator.difference;
-        }
-
         difference_type operator-(customIterator someIterator) {
             return difference - someIterator.difference;
         }
@@ -71,13 +67,12 @@ public:
         }
 
         customIterator operator+(difference_type someDiffer) {
-            difference_type tempDiffer = difference + someDiffer;
             if (myPointer + someDiffer > arrayEnd){
                 difference_type temp = arrayEnd - myPointer;
                 someDiffer -= temp;
-                return customIterator(arrayStart, arrayEnd, arrayEnd + someDiffer, countPointer, tempDiffer);
+                return customIterator(arrayStart, arrayEnd, arrayStart + someDiffer, countPointer, difference + someDiffer);
             }
-            else return customIterator(arrayStart, arrayEnd, myPointer + someDiffer, countPointer, tempDiffer);
+            else return customIterator(arrayStart, arrayEnd, myPointer + someDiffer, countPointer, difference + someDiffer);
         }
 
         customIterator &operator++() {
@@ -93,7 +88,7 @@ public:
         }
 
         reference operator*() {
-            return *myPointer;
+            return *(myPointer);
         }
     };
 
@@ -192,12 +187,12 @@ public:
 
     customIterator begin() const {
         if (tail != capacity - 1)
-            return customIterator(data, &data[capacity], &data[tail + 1], &data[capacity - size], 0);
-        else return customIterator(data, &data[capacity], &data[0], &data[capacity - size], 0);
+            return customIterator(&data[capacity - size], &data[capacity], &data[tail + 1], &data[capacity - size], 0);
+        else return customIterator(&data[capacity - size], &data[capacity], data, &data[capacity - size], 0);
     }
 
     customIterator end() const {
-        return customIterator(data, &data[capacity], &data[head], &data[capacity], size);
+        return customIterator(&data[capacity - size], &data[capacity], &data[head], &data[capacity], size);
     }
 
     T &operator[](size_t position) const {

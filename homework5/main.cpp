@@ -82,6 +82,7 @@ ostream& operator<<(ostream& out, const CircularBuffer<int>& a){
     return out;
 }
 
+
 template<class Ch, class Tr, class... Args>                                                      //cout tuple
 auto& operator<<(std::basic_ostream<Ch, Tr>& os, std::tuple<Args...> const& t) {
     maxDepth = max(depth + 1, maxDepth);

@@ -9,88 +9,60 @@ public:
     size_t capacity{};
     T *data;
 
-    class customIterator {
+    class customIterator{
     private:
-        T *arrayStart;
-        T *arrayEnd;
         T *myPointer;
-        T* countPointer;
-        int difference;
+        T *buffer;
+        size_t tailIndex;
+        size_t index;
+        size_t bufCapacity;
     public:
         using iterator_category [[maybe_unused]] = std::random_access_iterator_tag;
         using value_type [[maybe_unused]] = T;
-        using difference_type [[maybe_unused]] = int;
+        using difference_type = int;
         using pointer [[maybe_unused]] = T *;
         using reference = T &;
 
-        explicit customIterator(T *startOfArray, T *endOfArray, T *ptr, T* counter, difference_type diff) : arrayStart(startOfArray),
-                                                                          arrayEnd(endOfArray),
-                                                                          myPointer(ptr),
-                                                                          countPointer(counter),
-                                                                          difference(diff){}
-
-        bool operator!=(customIterator givenIterator) {
-            return countPointer != givenIterator.countPointer;
+        explicit customIterator(T *givenPointer, T *someBuff, size_t someHead, size_t number = 0, size_t someCapacity = 0) : myPointer(givenPointer), buffer(someBuff), tailIndex(someHead), index(number), bufCapacity(someCapacity){}
+        bool operator!=(customIterator givenIterator){
+            return myPointer != givenIterator.myPointer;
         }
-
-        bool operator==(customIterator someIterator) {
-            return myPointer == someIterator.myPointer;
-        }
-
-        bool operator<(customIterator someIterator) {
-            return difference < someIterator.difference;
-        }
-
-        bool operator>(customIterator someIterator) {
-            return difference > someIterator.difference;
-        }
-
-        customIterator &operator--() {
-            myPointer--;
-            difference--;
-            countPointer--;
+        customIterator &operator++(){
+            ++myPointer;
+            ++index;
             return *this;
         }
-
-        difference_type operator-(customIterator someIterator) {
-            return difference - someIterator.difference;
+        reference operator*(){
+            return buffer[(tailIndex + index) % bufCapacity];
         }
-
-        customIterator operator-(difference_type someDiffer) {
-            difference_type tempDiffer = difference - someDiffer;
-            if (myPointer - someDiffer < arrayStart){
-                difference_type temp = myPointer - arrayStart;
-                someDiffer -= temp;
-                return customIterator(arrayStart, arrayEnd, arrayEnd - someDiffer, countPointer, tempDiffer);
-            }
-            else return customIterator(arrayStart, arrayEnd, myPointer - someDiffer, countPointer, tempDiffer);
+        difference_type operator-(customIterator someIterator){
+            return myPointer - someIterator.myPointer;
         }
-
-        customIterator operator+(difference_type someDiffer) {
-            if (myPointer + someDiffer > arrayEnd){
-                difference_type temp = arrayEnd - myPointer;
-                someDiffer -= temp;
-                return customIterator(arrayStart, arrayEnd, arrayStart + someDiffer, countPointer, difference + someDiffer);
-            }
-            else return customIterator(arrayStart, arrayEnd, myPointer + someDiffer, countPointer, difference + someDiffer);
+        customIterator operator-(difference_type someDiff){
+            return customIterator(myPointer - someDiff, buffer, tailIndex, index - someDiff, bufCapacity);
         }
-
-        customIterator &operator++() {
-            ++countPointer;
-            ++difference;
-            if(myPointer == arrayEnd - 1){
-                myPointer = arrayStart;
-                return *this;
-            } else {
-                ++myPointer;
-                return *this;
-            }
+        customIterator operator+(difference_type someDiff){
+            return customIterator(myPointer + someDiff, buffer, tailIndex, index + someDiff, bufCapacity);
         }
-
-        reference operator*() {
-            return *(myPointer);
+        difference_type operator+(customIterator someIterator){
+            return myPointer + someIterator.myPointer;
+        }
+        bool operator==(customIterator someIterator){
+            return myPointer == someIterator.myPointer;
+        }
+        bool operator<(customIterator someIterator){
+            return myPointer < someIterator.myPointer;
+        }
+        bool operator>(customIterator someIterator){
+            return myPointer > someIterator.myPointer;
+        }
+        customIterator &operator--(){
+            --myPointer;
+            --index;
+            return *this;
         }
     };
+
 
 public:
     explicit CircularBuffer(size_t givenSize) : head(givenSize - 1), tail(givenSize - 1), capacity(givenSize),
@@ -186,13 +158,11 @@ public:
     }
 
     customIterator begin() const {
-        if (tail != capacity - 1)
-            return customIterator(&data[capacity - size], &data[capacity], &data[tail + 1], &data[capacity - size], 0);
-        else return customIterator(&data[capacity - size], &data[capacity], data, &data[capacity - size], 0);
+        return customIterator(&data[capacity - size], data, tail + 1, 0, capacity);
     }
 
     customIterator end() const {
-        return customIterator(&data[capacity - size], &data[capacity], &data[head], &data[capacity], size);
+        return customIterator(&data[capacity], data, tail + 1, capacity - 1, capacity);
     }
 
     T &operator[](size_t position) const {

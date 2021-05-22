@@ -119,6 +119,7 @@ public:
     void changeCapacity(size_t newCapacity) {
         T *newData = new T[newCapacity];
         int temp;
+        int tail_ = tail;
         int i = capacity;
         if (head != capacity - 1){
             temp = head;
@@ -128,7 +129,7 @@ public:
                 temp--;
             }
             temp = capacity - 1;
-            while (temp > tail){
+            while (temp > tail_){
                 newData[i] = data[temp];
                 i--;
                 temp--;
@@ -144,7 +145,7 @@ public:
         }
         else {
             temp = capacity - 1;
-            while (temp > tail) {
+            while (temp > tail_) {
                 newData[i] = data[i - 1];
                 i--;
                 temp--;

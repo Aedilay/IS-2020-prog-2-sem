@@ -1,4 +1,8 @@
 #pragma once
+#include <string>
+#include <sstream>
+
+using namespace std;
 
 template<typename T>
 class CircularBuffer {
@@ -92,13 +96,15 @@ public:
 
     T first() {
         if (size == 0)
-            throw std::out_of_range("Error: out of range");
+            throw std::out_of_range("Error: buffer is empty");
         if (tail == capacity - 1)
             return data[0];
         else return data[tail + 1];
     }
 
     T last() {
+        if (size == 0)
+            throw std::out_of_range("Error: buffer is empty");
         return data[head];
     }
 
@@ -167,8 +173,17 @@ public:
     }
 
     T &operator[](size_t position) const {
-        if (position < 0 || position >= size)
-            throw std::out_of_range("Error: out of range");
+        if (position < 0)
+            throw std::out_of_range("Error: index can't be negative");
+        if (size == 0)
+            throw std::out_of_range("Error: buffer is empty");
+        if (position >= size){
+            stringstream ss;
+            ss << "Error: index out of range (asking for " << position << ", max index " << size - 1 << ")";
+            string str = ss.str();
+            const char* err = str.c_str();
+            throw std::out_of_range(err);
+    }
         return data[(tail + position + 1) % capacity];
     }
 };

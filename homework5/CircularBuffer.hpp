@@ -96,7 +96,7 @@ public:
 
     T first() {
         if (size == 0)
-            throw std::out_of_range("Error: buffer is empty");
+            throw out_of_range("Error: buffer is empty");
         if (tail == capacity - 1)
             return data[0];
         else return data[tail + 1];
@@ -104,7 +104,7 @@ public:
 
     T last() {
         if (size == 0)
-            throw std::out_of_range("Error: buffer is empty");
+            throw out_of_range("Error: buffer is empty");
         return data[head];
     }
 
@@ -123,6 +123,8 @@ public:
     }
 
     void changeCapacity(size_t newCapacity) {
+        if (newCapacity < capacity)
+            throw bad_alloc();
         T *newData = new T[newCapacity];
         int temp;
         int tail_ = tail;
@@ -174,30 +176,30 @@ public:
 
     T operator[](size_t position) const {
         if (position < 0)
-            throw std::out_of_range("Error: index can't be negative");
+            throw out_of_range("Error: index can't be negative");
         if (size == 0)
-            throw std::out_of_range("Error: buffer is empty");
+            throw out_of_range("Error: buffer is empty");
         if (position >= size){
             stringstream ss;
             ss << "Error: index out of range (asking for " << position << ", max index " << size - 1 << ")";
             string str = ss.str();
             const char* err = str.c_str();
-            throw std::out_of_range(err);
+            throw out_of_range(err);
     }
         return data[(tail + position + 1) % capacity];
     }
 
     T &operator[](size_t position) {
         if (position < 0)
-            throw std::out_of_range("Error: index can't be negative");
+            throw out_of_range("Error: index can't be negative");
         if (size == 0)
-            throw std::out_of_range("Error: buffer is empty");
+            throw out_of_range("Error: buffer is empty");
         if (position >= size){
             stringstream ss;
             ss << "Error: index out of range (asking for " << position << ", max index " << size - 1 << ")";
             string str = ss.str();
             const char* err = str.c_str();
-            throw std::out_of_range(err);
+            throw out_of_range(err);
         }
         return data[(tail + position + 1) % capacity];
     }

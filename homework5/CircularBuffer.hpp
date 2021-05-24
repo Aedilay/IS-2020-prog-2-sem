@@ -172,7 +172,7 @@ public:
         return customIterator(&data[capacity], data, tail + 1, capacity - 1, capacity);
     }
 
-    T &operator[](size_t position) const {
+    T operator[](size_t position) const {
         if (position < 0)
             throw std::out_of_range("Error: index can't be negative");
         if (size == 0)
@@ -184,6 +184,21 @@ public:
             const char* err = str.c_str();
             throw std::out_of_range(err);
     }
+        return data[(tail + position + 1) % capacity];
+    }
+
+    T &operator[](size_t position) {
+        if (position < 0)
+            throw std::out_of_range("Error: index can't be negative");
+        if (size == 0)
+            throw std::out_of_range("Error: buffer is empty");
+        if (position >= size){
+            stringstream ss;
+            ss << "Error: index out of range (asking for " << position << ", max index " << size - 1 << ")";
+            string str = ss.str();
+            const char* err = str.c_str();
+            throw std::out_of_range(err);
+        }
         return data[(tail + position + 1) % capacity];
     }
 };

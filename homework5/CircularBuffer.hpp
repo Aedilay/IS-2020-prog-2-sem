@@ -179,7 +179,8 @@ public:
             throw out_of_range("Error: index can't be negative");
         if (size == 0)
             throw out_of_range("Error: buffer is empty");
-        if (position >= size){
+        if (position >= size) {
+        	//todo use only string
             stringstream ss;
             ss << "Error: index out of range (asking for " << position << ", max index " << size - 1 << ")";
             string str = ss.str();

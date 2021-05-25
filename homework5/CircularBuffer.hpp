@@ -1,5 +1,6 @@
 #pragma once
 #include <string>
+#include <sstream>
 
 using namespace std;
 
@@ -179,10 +180,10 @@ public:
         if (size == 0)
             throw out_of_range("Error: buffer is empty");
         if (position >= size){
+            //fixed use only string
             string str = reinterpret_cast<const char *>(scanf("Error: index out of range (asking for %d, max index %d)",
                                                               (position, size - 1)));
-            const char* err = str.c_str();
-            throw out_of_range(err);
+            throw out_of_range(str);
     }
         return data[(tail + position + 1) % capacity];
     }

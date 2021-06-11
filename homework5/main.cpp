@@ -82,6 +82,7 @@ ostream& operator<<(ostream& out, const CircularBuffer<int>& a){
     return out;
 }
 
+
 template<class Ch, class Tr, class... Args>                                                      //cout tuple
 auto& operator<<(std::basic_ostream<Ch, Tr>& os, std::tuple<Args...> const& t) {
     maxDepth = max(depth + 1, maxDepth);
@@ -140,7 +141,7 @@ bool assertPrint(const P& pred, Args&&... args) {
 }
 
 void checkConstOperator(const CircularBuffer<int>& cb) {
-    print(cb[2]);
+	print(cb[2]);
 }
 
 
@@ -173,7 +174,7 @@ int main(){
     c.addFirst(3);
     c.addFirst(4);
     checkConstOperator(c);
-    try {
+	try {
         c[4] = 1;
         throw "out of range";
     }
@@ -187,7 +188,7 @@ int main(){
     print<ss>(c);
     c.addFirst(6);
     print<ss>(c);
-    sort(c.begin(), c.end());
+	sort(c.begin(), c.end());
     print<ss>(c);
     callAssert(equal_to<>(), ss.str(), "4 3 2 1\n"
                                        "\n"

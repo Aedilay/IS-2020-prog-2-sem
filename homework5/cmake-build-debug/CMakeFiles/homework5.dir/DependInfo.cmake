@@ -4,7 +4,7 @@ set(CMAKE_DEPENDS_LANGUAGES
   )
 # The set of files for implicit dependencies of each language:
 set(CMAKE_DEPENDS_CHECK_CXX
-  "C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/main.cpp" "C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/cmake-build-debug/CMakeFiles/homework5.dir/main.cpp.obj"
+  "C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework5/main.cpp" "C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework5/cmake-build-debug/CMakeFiles/homework5.dir/main.cpp.obj"
   )
 set(CMAKE_CXX_COMPILER_ID "GNU")
 

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5
+# Install script for directory: C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework5
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -40,5 +40,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Labs/Y1S2/Proga (C++)/5/IS-2020-prog-2-sem/homework5/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework5/cmake-build-debug/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

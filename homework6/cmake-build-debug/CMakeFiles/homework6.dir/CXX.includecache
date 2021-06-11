@@ -1,0 +1,72 @@
+#IncludeRegexLine: ^[ 	]*[#%][ 	]*(include|import)[ 	]*[<"]([^">]+)([">])
+
+#IncludeRegexScan: ^.*$
+
+#IncludeRegexComplain: ^$
+
+#IncludeRegexTransform: 
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Algorithm.hpp
+random
+-
+iostream
+-
+fstream
+-
+map
+-
+algorithm
+-
+tuple
+-
+set
+-
+Cube.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Cube.hpp
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Controls.hpp
+GL/glut.h
+-
+GL/freeglut.h
+-
+iostream
+-
+Interface.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Interface.hpp
+Algorithm.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Algorithm.hpp
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Cube.hpp
+iostream
+-
+string
+-
+vector
+-
+Face.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Face.hpp
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Face.hpp
+vector
+-
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Initialize.hpp
+Controls.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Controls.hpp
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Interface.hpp
+GL/glut.h
+-
+GL/freeglut.h
+-
+cstdlib
+-
+cmath
+-
+
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/main.cpp
+GL/glut.h
+-
+Initialize.hpp
+C:/Labs/Y1S2/Proga (C++)/6/IS-2020-prog-2-sem/homework6/Initialize.hpp
+
